@@ -5,7 +5,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
+}z
 
 @theme inline {
   --color-background: var(--background);
@@ -30,6 +30,15 @@ textarea:focus, input:focus{
   outline: none !important;
   border:1px solid #a9a9a957;
   box-shadow: 0 0 10px #719ECE;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 /*input[type="text"]*/
 /*{*/

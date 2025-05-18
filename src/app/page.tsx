@@ -1,4 +1,4 @@
-import Navber from "@/app/navber";
+import Navber from "../components/navber";
 import ChatBox from "@/app/(home)/ChatBox";
 
 export default function Home() {

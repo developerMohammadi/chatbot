@@ -1,37 +1,30 @@
 'use client'
 import {useEffect, useRef, useState} from 'react'
 
-import {handleSend} from "@/app/utils/services/handleSend";
+import {handleSend} from "@/services/handleSend";
 
-interface Message {
-    role: 'user' | 'assistant';
-    content: string;
-    time?: string
-}
 
 export default function ChatBox() {
-    const [messages, setMessages] = useState<Message[]>(() => {
-        if (typeof window !== 'undefined') {
-            const saved = localStorage.getItem('chat-messages')
-            return saved ? JSON.parse(saved) : []
-        }
-        return []
-    })
+    const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('')
     const [isTyping, setIsTyping] = useState(false)
     const endRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('chat-messages', JSON.stringify(messages))
+        const saved = localStorage.getItem('chat-messages')
+        if (saved) {
+            setMessages(JSON.parse(saved))
         }
+    }, [])
 
+    useEffect(() => {
+        localStorage.setItem('chat-messages', JSON.stringify(messages))
         endRef.current?.scrollIntoView({behavior: 'smooth'})
     }, [messages])
 
 
     return (
-        <div className="flex flex-col p-4 bg-base-200 ">
+        <div className="flex flex-col p-4 bg-base-200 h-[100vh] pt-[90px]">
             <div className="flex-1 overflow-y-auto space-y-4 pb-[30px]">
                 {messages.map((msg, i) => (
                     <div
