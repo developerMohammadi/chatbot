@@ -2,14 +2,19 @@ import Navber from "@/app/navber";
 import ChatBox from "@/app/components/ChatBox";
 
 export default function Home() {
-  return <ChatBox/>
+  return (
+      <>
+        {/*<Navber/>*/}
+        <ChatBox/>
+      </>
+)
   //   (
   //       <>
   //           <div>test mashdi</div>
   //           <div className={"h-[90vh] p-1"}>
   //
   //               <div className={'h-[10%]'}>
-  //                   <Navber/>
+  //
   //               </div>
   //
   //
