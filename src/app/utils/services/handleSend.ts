@@ -7,7 +7,7 @@ export async function handleSend(
     messages: Message[],
     setMessages: Dispatch<SetStateAction<Message[]>>,
     setInput: Dispatch<SetStateAction<string>>,
-    setIsTyping: Dispatch<SetStateAction<boolean>>
+    setIsTyping: Dispatch<SetStateAction<boolean>>,
 ) {
     if (!input.trim()) return
 
@@ -27,7 +27,8 @@ export async function handleSend(
         const bot = data.choices[0].message
         const botMessage: Message = { role: 'assistant', content: bot.content, time: new Date().toLocaleTimeString('fa-IR') }
         setMessages(prev => [...prev, botMessage])
-    } catch {
+    }
+    catch {
         setMessages(prev => [...prev, { role: 'assistant', content: 'خطا در دریافت پاسخ', time: new Date().toLocaleTimeString('fa-IR') }])
     }
     setIsTyping(false)

@@ -1,7 +1,7 @@
 'use client'
 import {useEffect, useRef, useState} from 'react'
-import axios from "axios";
-import {handleSend} from "@/app/utils/handleSend";
+
+import {handleSend} from "@/app/utils/services/handleSend";
 
 interface Message {
     role: 'user' | 'assistant';
@@ -11,7 +11,6 @@ interface Message {
 
 export default function ChatBox() {
     const [messages, setMessages] = useState<Message[]>(() => {
-        // load from localStorage if exists
         if (typeof window !== 'undefined') {
             const saved = localStorage.getItem('chat-messages')
             return saved ? JSON.parse(saved) : []
@@ -23,47 +22,14 @@ export default function ChatBox() {
     const endRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        // save to localStorage
         if (typeof window !== 'undefined') {
             localStorage.setItem('chat-messages', JSON.stringify(messages))
         }
-        // scroll to bottom
+
         endRef.current?.scrollIntoView({behavior: 'smooth'})
     }, [messages])
 
-    // const handleSend = async () => {
-    //     if (!input.trim()) return
-    //
-    //     const now = new Date().toLocaleTimeString('fa-IR')
-    //     const userMessage: Message = {role: 'user', content: input, time: now}
-    //     setMessages(prev => [...prev, userMessage])
-    //     setInput('')
-    //     setIsTyping(true)
-    //
-    //     try {
-    //         const response = await axios.post(
-    //             'https://mocki.io/v1/abcd1234',
-    //             { messages: [userMessage] },
-    //             { headers: { 'Content-Type': 'application/json' } }
-    //         )
-    //
-    //         const bot = response.data.choices?.[0]?.message
-    //         const botMessage: Message = {
-    //             role: 'assistant',
-    //             content: bot?.content || 'پاسخی دریافت نشد',
-    //             time: new Date().toLocaleTimeString('fa-IR')
-    //         }
-    //         setMessages(prev => [...prev, botMessage])
-    //     } catch {
-    //         setMessages(prev => [...prev, {
-    //             role: 'assistant',
-    //             content:  'خطا در دریافت پاسخ',
-    //             time: new Date().toLocaleTimeString('fa-IR')
-    //         }])
-    //     }
-    //
-    //     setIsTyping(false)
-    // }
+
     return (
         <div className="flex flex-col p-4 bg-base-200 ">
             <div className="flex-1 overflow-y-auto space-y-4 pb-[30px]">
@@ -72,13 +38,12 @@ export default function ChatBox() {
                         key={i}
                         className={`chat ${msg.role === 'user' ? 'chat-end' : 'chat-start'}`}
                     >
-                        <div className={`chat-bubble ${msg.role === 'user' ? 'bg-info' : 'bg-warning'}`}>
+                        <div className={`chat-bubble ${msg.role === 'user' ? 'bg-[#00bcd4]' : 'bg-white'}`}>
                             <div
                                 className={`flex justify-between gap-4 text-xs mb-1 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                                 <div>{msg.time}</div>
                                 <div>{msg.content}</div>
                             </div>
-                            {/*<div></div>*/}
                         </div>
                     </div>
                 ))}
