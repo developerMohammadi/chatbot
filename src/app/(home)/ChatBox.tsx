@@ -1,7 +1,8 @@
 'use client'
-import {useEffect, useRef, useState} from 'react'
 
+import {useEffect, useRef, useState} from 'react'
 import {handleSend} from "@/services/handleSend";
+import {Message} from "@/types/index.t";
 
 
 export default function ChatBox() {
@@ -24,17 +25,17 @@ export default function ChatBox() {
 
 
     return (
-        <div className="flex flex-col p-4 bg-base-200 h-[100vh] pt-[90px]">
+        <div className="flex flex-col p-4 bg-[#f2f6fc] h-[100vh] pt-[90px]">
             <div className="flex-1 overflow-y-auto space-y-4 pb-[30px]">
                 {messages.map((msg, i) => (
                     <div
                         key={i}
                         className={`chat ${msg.role === 'user' ? 'chat-end' : 'chat-start'}`}
                     >
-                        <div className={`chat-bubble ${msg.role === 'user' ? 'bg-[#00bcd4]' : 'bg-white'}`}>
+                        <div className={`chat-bubble ${msg.role === 'user' ? 'bg-[#4a7fea] text-white' : 'bg-[#80808047] text-[#222]'}`}>
                             <div
                                 className={`flex justify-between gap-4 text-xs mb-1 ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                                <div>{msg.time}</div>
+                                <div className={'flex items-end'}>{msg.time}</div>
                                 <div>{msg.content}</div>
                             </div>
                         </div>

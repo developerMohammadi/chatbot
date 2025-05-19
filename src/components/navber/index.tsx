@@ -1,3 +1,6 @@
+import Image from 'next/image'
+import Icon from "@/assets/image/chatbot.png"
+
 const Navber = () => {
     return (
         <div className="navbar bg-base-100 shadow-sm fixed top-0 z-1">
@@ -5,17 +8,11 @@ const Navber = () => {
                 <a className="btn btn-ghost text-xl">Chat Bot</a>
             </div>
             <div className="flex-none">
-                <div className="dropdown dropdown-end">
-                    <div className={'font-peyda'}>test1</div>
-                    <div>test2</div>
 
-                </div>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"/>
+                          <Image src={Icon} alt={"logo"} width={40} height={40} />
                         </div>
                     </div>
                     <ul
